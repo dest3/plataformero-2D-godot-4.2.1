@@ -1,31 +1,39 @@
 extends CharacterBody2D
+class_name Player
+
+##Clase principal aplicada al nodo "player"
+##
+##en esta clase se gestiona el input del usuario, se recorre el nodo STATES para guardar referencia de los estados en un array y se gestiona el cambio de estados
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity_value = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #player input
+##[Vector2] que se utiliza para guardar el input de movimiento del jugador 
 var movement_input = Vector2.ZERO
+##variable para guardar si el jugador salta
 var jump_input = false
+##variable para guardar "cuando" el jugador salta
 var jump_input_actuation = false
-var climb_input = false 
-var dash_input = false
 
 #player_movement
-const SPEED = 70.0
-const JUMP_VELOCITY = -400.0
-var last_direction = Vector2.RIGHT
+##velocidad del jugador
+@export var SPEED = 70.0
+##fuerza de salto del jugador
+@export var JUMP_VELOCITY = -400.0
 
-#mechanics
-var can_dash = true
 
 #states
+##variable donde se guarda el estado actual del jugador
 var current_state = null
+##variable donde se guarda el estado anterior del jugador
 var prev_state = null
 
 #nodes
+##referencia al nodo estates donde se guardan los estados dentro del arbol del personaje
 @onready var STATES = $STATES
-@onready var Raycasts = $Raycasts
 
+##en esta funcion se recorren todos los nodos dentro del nodo STATES para guardar la referencia 
 func _ready():
 	for state in STATES.get_children():
 		state.STATES = STATES

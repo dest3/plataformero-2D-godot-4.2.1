@@ -1,4 +1,4 @@
-extends "res://scripts/entities/Player/states.gd"
+extends state
 
 func update(delta):
 	Player.gravity(delta)

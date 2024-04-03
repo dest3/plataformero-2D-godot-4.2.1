@@ -1,4 +1,4 @@
-extends "res://scripts/entities/Player/states.gd"
+extends state
 
 var can_jump = true
 func update(delta):
